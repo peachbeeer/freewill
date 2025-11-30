@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Me Anything – NGL style</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0d0004,   #21010f,  
+  #3b0017, 
+  #5a0023,  
+  #7a0031,   #a30445,  
+  #d41579,   #21010f   
+);
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --accent: #ff4b8b;
+      --accent-soft: rgba(255, 75, 139, 0.12);
+      --text-main: #ffffff;
+      --text-muted: #f7d6f0;
+      --input-bg: rgba(255, 255, 255, 0.22);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.25);
+      --radius-lg: 26px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: var(--bg-gradient);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      padding: 22px 20px 18px;
+      overflow: hidden;
+    }
+
+    .glow-dot {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.7), transparent);
+      border-radius: 50%;
+      top: -40px;
+      right: -30px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    .logo-text span:last-child {
+      font-size: 10px;
+      opacity: 0.7;
+      text-transform: none;
+    }
+
+    .handle {
+      font-size: 12px;
+      opacity: 0.85;
+      background: rgba(0, 0, 0, 0.22);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      opacity: 0.86;
+      margin-bottom: 14px;
+    }
+
+    form {
+      margin-top: 2px;
+    }
+
+    .textarea-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 10px 12px 32px;
+      background: var(--input-bg);
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+    }
+
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .char-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 8px;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .send-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 9px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4b8b, #ff7b6c);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        filter 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 13px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .anon-pill {
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0.9;
+    }
+
+    .anon-pill span {
+      font-size: 12px;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .footer-note a {
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+      padding-bottom: 1px;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      .card {
+        padding: 18px 16px 14px;
+        border-radius: 20px;
+      }
+
+      .title {
+        font-size: 17px;
+      }
+
+      textarea {
+        min-height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    
+
+    <div class="header-row">
+      <div class="logo-pill">
+        <div class="logo-dot"></div>
+        <div class="logo-text">
+          <span>anonymous inbox</span>
+          <span>powered by peach.beer 💌</span>
+        </div>
+      </div>
+      <!-- change this to your IG @ -->
+      <div class="handle">@baegarat</div>
+    </div>
+
+    <h1 class="title">Send me an anonymous message</h1>
+
+    <form action="#" method="post">
+      <div class="textarea-wrap">
+        <textarea
+          name="message"
+          placeholder="Type your statement..."
+          maxlength="500"
+          required
+        ></textarea>
+        <div class="char-hint">max 500 chars</div>
+      </div>
+
+      <div class="send-row">
+        <button type="submit">Send</button>
+        <div class="anon-pill">
+          <span>Sent anonymously</span>
+        </div>
+      </div>
+
+      <div class="footer-note">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
