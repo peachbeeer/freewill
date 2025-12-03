@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> say what you want </title>
+   <title> say what you want </title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #0d0004,   #21010f,  
-  #3b0017, 
-  #5a0023,  
-  #7a0031,   #a30445,  
-  #d41579,   #21010f   
-);
+      --bg-gradient: linear-gradient(
+        135deg,
+        #0d0004,
+        #21010f,
+        #3b0017,
+        #5a0023,
+        #7a0031,
+        #a30445,
+        #d41579,
+        #21010f
+      );
       --card-bg: rgba(255, 255, 255, 0.15);
       --card-border: rgba(255, 255, 255, 0.5);
       --accent: #ff4b8b;
@@ -140,6 +142,36 @@
       margin-top: 2px;
     }
 
+        .input-wrap {
+      margin-bottom: 10px;
+    }
+
+  .input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  opacity: 0.95;
+  margin-bottom: 6px;
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+
+    input[type="text"] {
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 8px 12px;
+      background: var(--input-bg);
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
     .textarea-wrap {
       position: relative;
       margin-bottom: 10px;
@@ -238,7 +270,6 @@
       padding-bottom: 1px;
     }
 
-    
     @media (max-width: 480px) {
       .card {
         padding: 18px 16px 14px;
@@ -257,7 +288,7 @@
 </head>
 <body>
   <div class="card">
-    
+    <div class="glow-dot"></div>
 
     <div class="header-row">
       <div class="logo-pill">
@@ -267,14 +298,29 @@
           <span>powered by samadrita 💌</span>
         </div>
       </div>
-   
       <div class="handle">@baegarat</div>
     </div>
 
     <h1 class="title">Send me an anonymous message</h1>
 
+<br> 
+
     <form name="baegarat" action="#" method="post" netlify>
-    <input type="hidden" name="baegarat" value="inbox" />
+      <input type="hidden" name="baegarat" value="inbox" />
+
+     
+      <div class="input-wrap">
+        <label class="input-label" for="sender-name"> Name </label> 
+        <input
+          type="text"
+          id="sender-name"
+          name="senderName"
+          placeholder="you can write your name, or leave this blank"
+        />
+      </div>
+
+<br>
+
       <div class="textarea-wrap">
         <textarea
           name="message"
@@ -298,5 +344,3 @@
   </div>
 </body>
 </html>
-
-
